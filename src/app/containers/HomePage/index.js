@@ -10,16 +10,20 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import Video from './video';
+import Queue from './queue';
+import './styles.css';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+      	<h1>Title Here</h1>
+      	<Video/>
+      	<Queue/>
+      </div>
     );
   }
 }
