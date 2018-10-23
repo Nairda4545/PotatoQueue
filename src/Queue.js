@@ -20,7 +20,7 @@ class Queue extends Component {
     return stack.map(stackitem => (
         <div>
           <h3>{stackitem.name}</h3>
-          <img src={`https://img.youtube.com/vi/${stackitem.vidId}/1.jpg`} />
+          <img src={`https://img.youtube.com/vi/${stackitem.vidId}/1.jpg`} alt=":<"/>
         </div>
       ));
   }
