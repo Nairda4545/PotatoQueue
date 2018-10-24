@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Video from './Video';
 import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
 import Queue from './Queue';
 import firebase from './firebase';
 
@@ -66,7 +67,7 @@ class Remote extends Component {
     this.state = {
       name: '',
       searchQuery: '',
-      seachResults: []
+      searchResults: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -80,15 +81,23 @@ class Remote extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // https://www.googleapis.com/youtube/v3/search?part=id%2C+snippet&maxResults=15&order=relevance&type=video&videoEmbeddable=true&key={YOUR_API_KEY}
-    console.log("potato");
-    console.log(process.env);
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=id%2C+snippet&maxResults=15&order=relevance&type=video&videoEmbeddable=true&key=AIzaSyDUjfeLpw6NsFoQ-xAOrWx7nO9Aj0aglhw&q=${this.state.searchQuery}`)
+    .then(results => {
+      return results.json();
+    })
+    .then(
+      data => {
+        this.setState({
+          searchResults: [...data.items]
+        });
+    })
   }
 
   render(){
     return (
     <div>
       <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      <SearchResults searchResults={this.state.searchResults}/>
     </div>
     )};
 }
